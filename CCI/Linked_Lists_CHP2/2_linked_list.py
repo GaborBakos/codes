@@ -14,8 +14,23 @@ class DLL:
     def print(self):
         current_node = self.head
         while current_node is not None:
-            print(current_node.data, end='-> <-')
+            if current_node.nextnode is None:
+                end = '\n'
+            else:
+                end = '<->'
+            print(current_node.data, end=end)
             current_node = current_node.nextnode
+        print()
+
+    def print_backwards(self):
+        current_node = self.tail
+        while current_node is not None:
+            if current_node.prevnode is None:
+                end = '\n'
+            else:
+                end = '<->'
+            print(current_node.data, end=end)
+            current_node = current_node.prevnode
         print()
 
     def delete_data(self, data):
@@ -42,6 +57,15 @@ class DLL:
         self.tail.nextnode = None
         return to_pop
 
+    def kth_to_last(self, k):
+        current_node = self.tail
+        for count in range(k):
+            if current_node.prevnode is not None:
+                print(current_node.data)
+                current_node = current_node.prevnode
+            else:
+                return False
+        return current_node.data
 
 print('Create a double linked list from elements Gabor')
 l1 = DLL()
@@ -63,6 +87,11 @@ l1.tail = n5
 
 print('Print out the list')
 l1.print()
+
+print('Print out the list backwards')
+l1.print_backwards()
+
+print('{} to last element is {}'.format(3, l1.kth_to_last(3)))
 
 
 print('Pop the first element from the list')
