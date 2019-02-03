@@ -4,7 +4,9 @@
     You may assume nums1 and nums2 cannot be both empty.
 '''
 
-def findMedianSortedArrays(nums1, nums2):
+def findMedianSortedArrays(A, B):
+    # The new code appears at the bottom, it is by MissMary and has a great explanation https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2481/Share-my-O(log(min(mn))-solution-with-explanation
+    '''
     len1 = len(nums1)
     len2 = len(nums2)
     if len1 == 0:
@@ -18,7 +20,6 @@ def findMedianSortedArrays(nums1, nums2):
         else:
             return nums1[int(len1 /2)]
     else:
-        '''
         # This part we will have to consider very carefully
         # We could implement something easy to begin with which will be of oreder O(n+m)
         # for this we implement a merge sort algorithm
@@ -53,9 +54,7 @@ def findMedianSortedArrays(nums1, nums2):
             return (combinded[int(lenc / 2 -1)] + combinde[int(lenc / 2)]) / 2
         else:
             return combined[int(lenc / 2)]
-        '''
         # We will now need to think of a way to do this in O(log(n*m)) time.
-
         # There is a great article at http://www.drdobbs.com/parallel/finding-the-median-of-two-sorted-arrays/240169222?pgno=2
         # which explains a method we will try and implement here in Python
         
@@ -160,6 +159,40 @@ def findMedianSortedArrays(nums1, nums2):
             return findMedianSortedArrays(nums1, len1, nums2, len2)
         else:
             return findMedianSortedArrays(nums2, len2, nums1, len1)
+
+    '''
+    m, n = len(A), len(B)
+    if m > n:
+        A, B, m, n = B, A, n, m
+    if n == 0:
+        raise ValueError
+
+    imin, imax, half_len = 0, m, int((m + n + 1) / 2)
+    while imin <= imax:
+        i = int((imin + imax) / 2)
+        j = half_len - i
+        if i < m and B[j-1] > A[i]:
+            # i is too small, must increase it
+            imin = i + 1
+        elif i > 0 and A[i-1] > B[j]:
+            # i is too big, must decrease it
+            imax = i - 1
+        else:
+            # i is perfect
+
+            if i == 0: max_of_left = B[j-1]
+            elif j == 0: max_of_left = A[i-1]
+            else: max_of_left = max(A[i-1], B[j-1])
+
+            if (m + n) % 2 == 1:
+                return max_of_left
+
+            if i == m: min_of_right = B[j]
+            elif j == n: min_of_right = A[i]
+            else: min_of_right = min(A[i], B[j])
+
+            return (max_of_left + min_of_right) / 2.0
+
 
 
 print('Test nums1 empty')
