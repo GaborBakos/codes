@@ -1,7 +1,7 @@
 '''
     This is a small collection of algorithms that I found interesting during coding.
 '''
-
+import math
 def highest_substring_sum(lst):
     '''
         Finding the highest sum of all substrings in a list.
@@ -12,8 +12,8 @@ def highest_substring_sum(lst):
     if not lst:
         return
 
-    current_max = lst[0]
-    maximum = lst[0]
+    current_max = -math.inf
+    maximum = -math.inf
 
     for value in lst:
         current_max = max(value, current_max + value)
