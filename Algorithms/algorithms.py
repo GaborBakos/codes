@@ -1,4 +1,17 @@
+'''
+    This is a small collection of algorithms that I found interesting during coding.
+'''
+
 def highest_substring_sum(lst):
+    '''
+        Finding the highest sum of all substrings in a list.
+        The algorithms is based on Kadane's algorithm.
+        It solves this problem in O(n) and can solve the problem in 
+        the case when all elements are -ve.        
+    '''
+    if not lst:
+        return
+
     current_max = lst[0]
     maximum = lst[0]
 
