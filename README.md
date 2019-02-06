@@ -1,6 +1,6 @@
 # Solutions to Programming Questions
 
-## Cracking The Coding Interview --> CCI
-## Leet Code --> LT
-## Project Euler --> PE
-
+* HR: HackerRank
+* CCI: Cracking the Coding Interview
+* LT: LeetCode
+* PE: Project Euler
