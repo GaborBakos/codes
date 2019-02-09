@@ -1,0 +1,8 @@
+Select
+    pp.FirstName,
+    pp.LastName,
+    aa.City,
+    aa.State
+From Person pp
+Left Join Address aa
+    On pp.PersonId = aa.PersonId
